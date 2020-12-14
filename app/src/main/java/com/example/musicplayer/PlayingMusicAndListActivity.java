@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaMetadataRetriever;
@@ -44,9 +47,11 @@ public class PlayingMusicAndListActivity extends AppCompatActivity {
     AudioManager audioManager;
     boolean soundCheck;
     int volumeProgress;
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_playing_music_and_list);
         initViews();
         soundCheck = false;
@@ -276,12 +281,12 @@ public class PlayingMusicAndListActivity extends AppCompatActivity {
                     soundCheck = true;
                 }
                 else{
+                    soundCheck = false;
                     seekBar.setMax(mediaPlayer.getDuration() / 1000);
                     seekBar.setProgress(mediaPlayer.getCurrentPosition() / 1000);
                     sound_btn.setImageResource(R.drawable.ic_volume_gray);
                     songName.setTextColor(Color.parseColor("#FF03DAC6"));
                     songName.setText(songArrayList.get(position).getTitle());
-                    soundCheck = false;
                 }
             }
         };
@@ -317,7 +322,6 @@ public class PlayingMusicAndListActivity extends AppCompatActivity {
 
             }
         });
-        //
         position = getIntent().getIntExtra("position", -1);
         songArrayList = musicList;
         if(songArrayList != null){
