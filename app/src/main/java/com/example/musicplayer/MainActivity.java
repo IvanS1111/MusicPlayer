@@ -67,12 +67,9 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         SongsFragment frg = new SongsFragment();
         Drawable drawable = getResources().getDrawable( R.drawable.shape);
-        //frg.getView().setBackground(drawable);
         viewPagerAdapter.addFragment(frg, "Music");
-
-
-        viewPagerAdapter.addFragment(new AlbumsFragment(), "Albums");
-        viewPagerAdapter.addFragment(new SettingFragment(), "Setting");
+        //viewPagerAdapter.addFragment(new AlbumsFragment(), "Albums");
+        //viewPagerAdapter.addFragment(new SettingFragment(), "Setting");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
